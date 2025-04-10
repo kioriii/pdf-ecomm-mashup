@@ -1,0 +1,62 @@
+<% content_for :title, "Pdfs" %>
+
+<div class="w-full">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">Pdfs</h1>
+    <%= link_to "New pdf", new_pdf_path, class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
+  </div>
+
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">New Empty PDF</h1>
+    <%= link_to "Generate empty pdf", "/new_empty_pdf", class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
+  </div>
+
+  <%# This is the test pdf - refer to the Pdfs controller %>
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">New Test BOA PDF</h1>
+    <%= link_to "Generate test pdf", "/new_test_pdf", class: "rounded-md px-3.5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white block font-medium" %>
+  </div>
+
+
+  <%# This is to choose the number of pages %>
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">Choose the # of pages</h1>
+
+    <%# creating a form %>
+    <%= form_tag("/pdfnumber", data: {turbo: false}) do |n| %> <%# the data: turbo false is needed to ensure the request is sent as html, and not turbo. If it is turbo, then it cannot download the file %>
+      <%= label_tag :number, "Enter a Number:" %>
+      <%= number_field_tag :number, min: 1, required: true %>
+      <%= submit_tag "Number of PDF pages", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+
+<%# This is to add numbering %>
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">Adding numbering</h1>
+
+    <%# creating a form %>
+    <%= form_tag("/pdfnumber_numbered", data: {turbo: false}) do |n| %> <%# the data: turbo false is needed to ensure the request is sent as html, and not turbo. If it is turbo, then it cannot download the file %>
+      <%= label_tag :number, "Enter a Number:" %>
+      <%= number_field_tag :number, min: 1, required: true %>
+      <%= submit_tag "Number of PDF pages", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+
+
+  <div id="pdfs" class="min-w-full">
+    <% if @pdfs.any? %>
+      <% @pdfs.each do |pdf| %>
+        <%= render pdf %>
+        <p>
+          <%= link_to "Show this pdf", pdf, class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
+        </p>
+      <% end %>
+    <% else %>
+      <p class="text-center my-10">No pdfs found.</p>
+    <% end %>
+  </div>
+</div>

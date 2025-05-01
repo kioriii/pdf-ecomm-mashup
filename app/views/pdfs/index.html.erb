@@ -47,6 +47,28 @@
   </div>
 
 
+<%# This is to upload file %>
+  <div class="flex justify-between items-center">
+    <h1 class="font-bold text-4xl">Upload a file</h1>
+
+    <%# creating a form %>
+    <%= form_with(model: @document, local:true) do |document| %> <%# the data: turbo false is needed to ensure the request is sent as html, and not turbo. If it is turbo, then it cannot download the file %>
+      <%= form.label  :document %>
+      <%= form.file_field  :document%>
+
+      <%= form.submit %>
+    <% end %>
+  </div>
+
+
+
+
+
+
+
+
+
+
   <div id="pdfs" class="min-w-full">
     <% if @pdfs.any? %>
       <% @pdfs.each do |pdf| %>

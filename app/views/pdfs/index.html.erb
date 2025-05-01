@@ -54,7 +54,7 @@
     <%# creating a form %>
     <%= form_with(model: @document, local:true) do |document| %> <%# the data: turbo false is needed to ensure the request is sent as html, and not turbo. If it is turbo, then it cannot download the file %>
       <%= form.label  :document %>
-      <%= form.file_field  :document%>
+      <%# <%= form.file_field  :document%> %>
 
       <%= form.submit %>
     <% end %>

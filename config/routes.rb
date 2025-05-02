@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  resources :documents
   resources :pdfs
   namespace :admin do
+    resources :documents
     resources :categories
   end
   devise_for :admins
